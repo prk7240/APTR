@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>APOCALYPSE TRADER</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game">
+    <header class="topbar">
+      <div class="logo">APOCALYPSE TRADER</div>
+      <div class="topbar-status">
+        <div class="day-box">DAY <span id="day">1</span></div>
+        <div class="time-box">☀ <span id="timeText">오전</span></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="shelter-scene">
+        <div class="scene-wall">
+          <div class="pipe pipe1"></div><div class="pipe pipe2"></div>
+          <div class="lamp lamp1"></div><div class="lamp lamp2"></div>
+          <div class="shelf left-shelf"></div>
+          <div class="shelf right-shelf"></div>
+
+          <div id="doorArea" class="door-area closed">
+            <div class="curtain curtain-left"></div>
+            <div class="curtain curtain-right"></div>
+            <div class="outside">
+              <div class="sky"></div>
+              <div class="ruins"></div>
+              <div id="visitor" class="visitor"></div>
+            </div>
+          </div>
+
+          <div id="knockEffect" class="knock-effect">똑똑...</div>
+        </div>
+      </section>
+
+      <section class="status-panel">
+        <div class="utility-buttons">
+          <button id="infoBtn" class="small-btn">▣ 정보</button>
+          <button id="shelterBtn" class="small-btn">⚒ 쉘터 관리</button>
+        </div>
+
+        <div class="action-card">
+          <div class="label">행동력</div>
+          <div id="actionPoints" class="action-points">⚡ ⚡ ⚡</div>
+        </div>
+
+        <div class="resources-grid">
+          <div class="resource"><span class="icon water">💧</span><b>물</b><strong id="water">50</strong></div>
+          <div class="resource"><span class="icon food">🍖</span><b>식량</b><strong id="food">50</strong></div>
+          <div class="resource"><span class="icon power">⚡</span><b>전기</b><strong id="power">30</strong></div>
+          <div class="resource"><span class="icon stone">◆</span><b>마석</b><strong id="stone">5</strong></div>
+        </div>
+      </section>
+
+      <section class="lower-grid">
+        <div class="panel survival">
+          <h3>생존 상태</h3>
+          <div class="bar-row"><span>🍖 허기</span><div class="bar"><i id="hungerBar"></i></div><b id="hunger">80</b></div>
+          <div class="bar-row"><span>💧 목마름</span><div class="bar blue"><i id="thirstBar"></i></div><b id="thirst">70</b></div>
+          <div class="bar-row"><span>🧠 정신</span><div class="bar purple"><i id="sanityBar"></i></div><b id="sanity">75</b></div>
+        </div>
+
+        <div class="panel facilities">
+          <h3>쉘터 시설</h3>
+          <div class="facility-grid">
+            <button class="facility" data-facility="water">💧<span>물 정화실</span></button>
+            <button class="facility" data-facility="food">🌱<span>식량 재배실</span></button>
+            <button class="facility" data-facility="power">⚙<span>발전실</span></button>
+            <button class="facility" data-facility="bed">🛏<span>침실</span></button>
+            <button class="facility" data-facility="trade">▣<span>메인 거래실</span></button>
+          </div>
+        </div>
+
+        <div class="panel event-panel">
+          <h3>현재 이벤트</h3>
+          <div id="eventText">노크를 기다리는 중...</div>
+        </div>
+
+        <div class="panel cctv-panel">
+          <h3>📹 CCTV</h3>
+          <div id="cctv" class="cctv-screen normal">CAM 01<br><span>정상</span></div>
+        </div>
+      </section>
+
+      <section class="item-bar panel">
+        <h3>아이템 (클릭하여 사용)</h3>
+        <div class="items">
+          <div onclick="useItem('food')" style="cursor:pointer;" title="식량 사용: 허기 +20">🍖<span>식량 <b id="itemFoodCount">0</b></span></div>
+          <div onclick="useItem('water')" style="cursor:pointer;" title="물 사용: 목마름 +20">💧<span>물 <b id="itemWaterCount">0</b></span></div>
+          <div onclick="useItem('medicines')" style="cursor:pointer;" title="의약품 사용: 정신 +20">💊<span>의약품 <b id="itemMedCount">0</b></span></div>
+          <div onclick="useItem('tobacco')" style="cursor:pointer;" title="담배 사용: 정신 +15, 목마름 -5">🚬<span>담배 <b id="itemTobCount">0</b></span></div>
+          <div onclick="useItem('alcohol')" style="cursor:pointer;" title="술 사용: 목마름 +15, 정신 -10">🍾<span>술 <b id="itemAlcCount">0</b></span></div>
+          <div onclick="useItem('equipment')" style="cursor:pointer;" title="장비">🧰<span>장비 <b id="itemEqCount">0</b></span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <button id="closeModal" class="close">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
